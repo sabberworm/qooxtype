@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var Analyzer = require('./analyzer')
+var Analyzer = require('./lib/analyzer');
 
 if(process.argv.length < 3) {
 	console.error('USAGE: node qx2ts /path/to/qooxdoo/app generated-file-name.d.ts');

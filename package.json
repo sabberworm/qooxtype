@@ -1,8 +1,9 @@
 {
   "author": "Raphael Schweikert <any@sabberworm.com>",
-  "name": "qx2ts",
+  "name": "qooxtype",
   "description": "Converts Qooxdoo generated API JSONs to a TypeScript declaration source file.",
   "version": "0.0.0",
+	"private": true,
   "repository": {
     "url": ""
   },
