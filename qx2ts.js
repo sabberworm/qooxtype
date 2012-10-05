@@ -17,18 +17,24 @@ if(!fs.existsSync(paths.app)) {
 	paths.app = fs.realpathSync(paths.app);
 }
 
-if(!paths.result) {
-	paths.result = path.basename(paths.app) + '.d.ts';
+paths.basename = path.basename(paths.app);
+
+if(paths.basename === 'framework') {
+	paths.basename = path.basename(path.dirname(paths.app));
 }
 
-paths.app = path.join(paths.app, 'framework', 'api', 'script');
+if(!paths.result) {
+	paths.result = paths.basename + '.d.ts';
+}
+
+paths.app = path.join(paths.app, 'api', 'script');
 
 if(!fs.existsSync(paths.app)) {
 	console.error('No generated API files found in: %s', paths.app);
 	process.exit();
 }
 
-console.info('Generating %s for API in %', paths.result, paths.app);
+console.info('Generating %s for API in %s', paths.result, paths.app);
 
 paths.result = path.resolve(paths.result);
 
