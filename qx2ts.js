@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 
 var Analyzer = require('./lib/analyzer');
+var Index = require('./lib/index');
 
 if(process.argv.length < 3) {
 	console.error('USAGE: node qx2ts /path/to/qooxdoo/app [generated-file-name.d.ts]');
@@ -42,15 +43,21 @@ fs.readdir(paths.app, function(error, files) {
 	if(error) {
 		console.error('Could not find API files: %s', error);
 	}
-	var output = fs.createWriteStream(paths.result);
+	var index = new Index();
 	files.forEach(function(fileName) {
 		if(path.extname(fileName) !== '.json') {
 			console.log('Ignoring extraneous file %s', fileName);
 			return;
 		}
 		var filePath = path.join(paths.app, fileName);
-		var analyzer = new Analyzer(path.basename(filePath, '.json'), filePath);
-		analyzer.analyze(output);
+		var name = path.basename(filePath, '.json');
+		if(name === 'apiindex' || name === 'apidata') {
+			return;
+		}
+		index.addItem(filePath);
 	});
+	var output = fs.createWriteStream(paths.result);
+	var analyzer = new Analyzer(index);
+	analyzer.analyze(output);
 	output.end();
 });
