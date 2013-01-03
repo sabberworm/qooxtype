@@ -54,7 +54,7 @@ fs.readdir(paths.app, function(error, files) {
 		if(name === 'apiindex' || name === 'apidata') {
 			return;
 		}
-		index.addItem(filePath);
+		index.addClass(filePath);
 	});
 	var output = fs.createWriteStream(paths.result);
 	var analyzer = new Analyzer(index);
