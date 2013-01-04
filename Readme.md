@@ -4,7 +4,7 @@ qx2ts is a small node.js utility that takes a folder full of JSON files (as gene
 
 It also contains some useful aliases for the types used by qooxdoo itself.
 
-Note: This has to be reworked considerably in order to produce usable .d.ts files.
+Generated files for the most recent versions of qooxdoo are also included
 
 ## Usage
 
